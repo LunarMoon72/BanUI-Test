@@ -19,7 +19,7 @@ class Main extends PluginBase {
 		$this->getLogger()->info("Plugin has been enabled");
 	}
 	public function onDisabled() : void {
-		$this->getLogger()->info("Plugin Disabled :(");
+		$this->getLogger()->info("Plugin Disabled");
 	}
 	public function onCommand(CommandSender $sender, Command $cmd, String $label, Array $args) : bool {
 		switch($cmd->getName()){
@@ -62,7 +62,7 @@ class Main extends PluginBase {
 			var_dump($data);
 			switch($data){
 				case 0:
-				    $this->getServer()->dispatchCommand("rca " . $player . "tempban " . $data[1] $data[0]);
+				    $this->getServer()->dispatchCommand($player, "tempban " . $data[1] . " " . $data[0]);
 				break;
 			}
 		});
@@ -73,7 +73,6 @@ class Main extends PluginBase {
 		$form->addInput("Type a Player here!");
 	}
 	public function kickUI($player){
-		public function banUI($player){
 		$form = new CustomForm(function(Player $player, int $data){
 			if($data === null){
 				return true;
@@ -81,7 +80,7 @@ class Main extends PluginBase {
 			var_dump($data);
 			switch($data){
 				case 0:
-				    $this->getServer()->dispatchCommand("rca " . $player->getName() "kick " $data[0]);
+				    $this->getServer()->dispatchCommand($player, "kick " . $data[1]);
 				break;
 			}
 		});
