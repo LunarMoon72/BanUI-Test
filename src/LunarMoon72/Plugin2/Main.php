@@ -54,7 +54,6 @@ class Main extends PluginBase {
 		$form->addButton(C::BLUE . "Kick a Player");
 		$form->addButton(C::RED . "Ban a Player");
 	}
-	public function banUI($player){
 		public function banUI($player){
 		$form = new CustomForm(function(Player $player, int $data){
 			if($data === null){
