@@ -3,6 +3,7 @@ main: LunarMoon72\Plugin2\Main
 api: 3.21.1
 version: 1.0.0
 mcpe-protocal: 448
+author: LunarMoon72
 
 commands:
   banui:
