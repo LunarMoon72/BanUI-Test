@@ -1,5 +1,5 @@
 name: Plugin2
-main: LunarMoon72\Plugin2\Main
+main: LunarMoon72\BanUI\Main
 api: 3.21.1
 version: 1.0.0
 mcpe-protocal: 448
