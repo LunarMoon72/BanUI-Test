@@ -1,0 +1,14 @@
+name: Plugin2
+main: LunarMoon72\Plugin2\MainClass
+api: 3.21.1
+version: 1.0.0
+mcpe-protocal: 448
+
+commands:
+  banui:
+    description: Cool UI!
+    permission: banui.cmd
+
+permissions:
+  banui.cmd:
+    default: op
