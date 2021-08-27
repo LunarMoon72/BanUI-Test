@@ -24,14 +24,14 @@ class Main extends PluginBase {
 	public function onCommand(CommandSender $sender, Command $cmd, String $label, Array $args) : bool {
 		switch($cmd->getName()){
 			case "banui":
-			$sender->mainUI($sender);
+			$sender->mainUI();
 			if(!$sender instanceof Player){
 				$this->getLogger()->info("Must be a Player!");
 			}
 		}
 		return true;
 	}
-	public function mainUI($player){
+	public function mainUI(){
 		$form = new CustomForm(function(Player $player, int $data){
 			if($data === null){
 				return true;
@@ -39,11 +39,11 @@ class Main extends PluginBase {
 			var_dump($data);
 			switch($data){
 				case 0:
-				    $player->kickUI($player);
+				    $player->kickUI();
 				break;
 
 				case 1:
-				    $player->banUI($player);
+				    $player->banUI();
 				break;
 
 			}
@@ -54,7 +54,7 @@ class Main extends PluginBase {
 		$form->addButton(C::BLUE . "Kick a Player");
 		$form->addButton(C::RED . "Ban a Player");
 	}
-		public function banUI($player){
+		public function banUI(){
 		$form = new CustomForm(function(Player $player, int $data){
 			if($data === null){
 				return true;
@@ -72,7 +72,7 @@ class Main extends PluginBase {
 		$form->addSlider("Amount of days the player will be banned", 1, 30);
 		$form->addInput("Type a Player here!");
 	}
-	public function kickUI($player){
+	public function kickUI(){
 		$form = new CustomForm(function(Player $player, int $data){
 			if($data === null){
 				return true;
