@@ -1,0 +1,10 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/LunarMoon72/BanUI-Test
+build-by-default: true
+branches:
+- main
+projects:
+  BanUI-Test:
+    path: ""
+libs:
+    - src: jojoe77777/FormAPI/libFormAPI
+      version: ^1.3
