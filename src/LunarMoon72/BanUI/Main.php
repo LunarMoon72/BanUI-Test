@@ -53,6 +53,8 @@ class Main extends PluginBase {
 		$form->addLabel("Press an option to be transported to next ui!");
 		$form->addButton(C::BLUE . "Kick a Player");
 		$form->addButton(C::RED . "Ban a Player");
+		$form->sendToPlayer();
+		return $form;
 	}
 		public function banUI(){
 		$form = new CustomForm(function(Player $player, int $data){
@@ -71,6 +73,8 @@ class Main extends PluginBase {
 		$form->addLabel(C::RED . "TYEP A PLAYER TO BAN THEM");
 		$form->addSlider("Amount of days the player will be banned", 1, 30);
 		$form->addInput("Type a Player here!");
+		$form->sendToPlayer();
+		return $form;
 	}
 	public function kickUI(){
 		$form = new CustomForm(function(Player $player, int $data){
@@ -88,5 +92,7 @@ class Main extends PluginBase {
 		$form->setTitle("Type a Player to Ban them");
 		$form->addLabel(C::RED . "TYEP A PLAYER TO KICK THEM");
 		$form->addInput("Type a Player here!");
+		$form->sendToPlayer();
+		return $form;
 	}
 }
