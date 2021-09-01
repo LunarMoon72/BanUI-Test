@@ -80,7 +80,7 @@ class Main extends PluginBase {
 				case 0:
 				   $this->getServer()->sendMessage("/rca " . $player . " freeze " . $data[0]);
 				   if($data[0] === null){
-				   	$sender->sendMessage("§c[BanUI] Please put a Player!")
+				   	$sender->sendMessage("§c[BanUI] Please put a Player!");
 				   }
 			}
 		});
@@ -96,7 +96,7 @@ class Main extends PluginBase {
 				case 0:
 				   $this->getServer()->sendMessage("/rca " . $player . " kick " . $data[0]);
 				   if($data[0] === null){
-				   	$sender->sendMessage("§c[BanUI] Please put a Player!")
+				   	$sender->sendMessage("§c[BanUI] Please put a Player!");
 				   }
 			}
 		});
