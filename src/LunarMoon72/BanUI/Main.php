@@ -1,98 +1,108 @@
 <?php
 
-namespace LunarMoon72\BanUI;
+namespace LunarMoon72\Banui;
 
 use pocketmine\plugin\PluginBase;
 
-use jojoe77777\FormAPI\CustomForm;
-
-use pocketmine\Server;
-use pocketmine\Player;
-
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-
-use pocketmine\utils\TextFormat as C;
+use pocketmine\{
+	Player, Server
+};
+use pocketmine\command\{
+	Command, CommandSender,
+};
 
 class Main extends PluginBase {
-	public function onEnabled() : void{
-		$this->getLogger()->info("Plugin has been enabled");
+	public function onEnabled() : void {
+		$this->getLogger()->info("§c[BanUI] is enabled. Made by LunarMoon72");
 	}
-	public function onDisabled() : void {
-		$this->getLogger()->info("Plugin Disabled");
-	}
-	public function onCommand(CommandSender $sender, Command $cmd, String $label, Array $args) : bool {
+	public function onCommand(Command $cmd, CommandSender $sender, String $label, Array $args) : bool {
 		switch($cmd->getName()){
 			case "banui":
-			$sender->mainUI();
-			if(!$sender instanceof Player){
-				$this->getLogger()->info("Must be a Player!");
+			if(!$sender->hasPermission()"banui.cmd"){
+				$sender->sendMessage("YOU LACK THE PERM LOL");
+			} else {
+				$this->mainUI($sender);
 			}
+			   if($sender instanceof Player){
+			   	$this->mainUI($sender);
+	         } else {
+	         	$this->getLogger()->info("Must use INGAME!");
+	         }
+	         break;
 		}
 		return true;
 	}
-	public function mainUI(){
-		$form = new CustomForm(function(Player $player, int $data){
-			if($data === null){
-				return true;
-			}
+	public function banUI($player) {
+		$form = $this->getServer()->getPluginManager()->getPlugin("FormAPI")->createCustomForm(function(Player $player, $data){
 			var_dump($data);
 			switch($data){
 				case 0:
-				    $player->kickUI();
+				   $this->getServer()->sendMessage("/rca " . $player . " tempban " . $data[0] . " " . $data[1] . " " . $data[2]);
+				   $player->sendMessage("§c[BanUI] Player has been banned for " . $data[1] . " days for " . $data[2]);
+				break;
+			}
+		});
+		$form->setTitle("§cType a Player to Ban Them");
+		$form->addInput("Type Player Here!", "Ex: LunarMoon72", ".");
+		$form->addSlider("Ban Time in Days:", 1, 30);
+		$form->addInput("Reason for ban", "Ex: BHopping in Warzone", ".");
+		$form->sendToPlayer($player);
+		return $form;
+	}
+	public function mainUI($player){
+		$form = $this->getServer()->getPluginManager()->getPlugin("FormAPI")->createSimpleForm(function(Player $player, $data){
+			var_dump($data);
+			switch($data){
+				case 0:
+				    $this->freezeUI($player);
 				break;
 
 				case 1:
-				    $player->banUI();
+				    $this->banUI($player);
 				break;
 
+				case 2:
+				    $this->kickUI($player);
+				break;
 			}
 		});
-
-		$form->setTitle("Select an Option");
-		$form->addLabel("Press an option to be transported to next ui!");
-		$form->addButton(C::BLUE . "Kick a Player");
-		$form->addButton(C::RED . "Ban a Player");
-		$form->sendToPlayer();
+		$form->setTitle("§cPress an Option");
+		$form->addButton("Freeze a Player");
+		$form->addButton("Ban a Player");
+		$form->addButton("Kick a Player");
+		$form->sendToPlayer($player);
 		return $form;
 	}
-		public function banUI(){
-		$form = new CustomForm(function(Player $player, int $data){
-			if($data === null){
-				return true;
-			}
+	public function freezeUI($player){
+		$form = $this->getServer()->getPluginManager()->getPlugin("FormAPI")->createCustomForm(function(Player $player, $data){
 			var_dump($data);
 			switch($data){
 				case 0:
-				    $this->getServer()->dispatchCommand($player, "tempban " . $data[1] . " " . $data[0]);
-				break;
+				   $this->getServer()->sendMessage("/rca " . $player . " freeze " . $data[0]);
+				   if($data[0] === null){
+				   	$sender->sendMessage("§c[BanUI] Please put a Player!")
+				   }
 			}
 		});
-
-		$form->setTitle("Type a Player to Ban them");
-		$form->addLabel(C::RED . "TYEP A PLAYER TO BAN THEM");
-		$form->addSlider("Amount of days the player will be banned", 1, 30);
-		$form->addInput("Type a Player here!");
-		$form->sendToPlayer();
+		$form->setTitle("§bType a Player to Freeze them!");
+		$form->addInput("Type in a Player! Make sure to put the FULL USER.", "Ex: LunarMoon72", ".");
+		$form->sendToPlayer($player);
 		return $form;
 	}
-	public function kickUI(){
-		$form = new CustomForm(function(Player $player, int $data){
-			if($data === null){
-				return true;
-			}
+	public function kickUI($player){
+		$form = $this->getServer()->getPluginManager()->getPlugin("FormAPI")->createCustomForm(function(Player $player, $data){
 			var_dump($data);
 			switch($data){
 				case 0:
-				    $this->getServer()->dispatchCommand($player, "kick " . $data[1]);
-				break;
+				   $this->getServer()->sendMessage("/rca " . $player . " kick " . $data[0]);
+				   if($data[0] === null){
+				   	$sender->sendMessage("§c[BanUI] Please put a Player!")
+				   }
 			}
 		});
-
-		$form->setTitle("Type a Player to Ban them");
-		$form->addLabel(C::RED . "TYEP A PLAYER TO KICK THEM");
-		$form->addInput("Type a Player here!");
-		$form->sendToPlayer();
+		$form->setTitle("§bType a Player to Kick them!");
+		$form->addInput("Type in a Player! Make sure to put the FULL USER.", "Ex: LunarMoon72", ".");
+		$form->sendToPlayer($player);
 		return $form;
 	}
 }
