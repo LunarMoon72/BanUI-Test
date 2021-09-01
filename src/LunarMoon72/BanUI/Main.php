@@ -1,6 +1,6 @@
 <?php
 
-namespace LunarMoon72\Banui;
+namespace LunarMoon72\BanUI;
 
 use pocketmine\plugin\PluginBase;
 
@@ -15,7 +15,7 @@ class Main extends PluginBase {
 	public function onEnabled() : void {
 		$this->getLogger()->info("§c[BanUI] is enabled. Made by LunarMoon72");
 	}
-	public function onCommand(Command $cmd, CommandSender $sender, String $label, Array $args) : bool {
+	public function onCommand(CommandSender $sender, Command $cmd, String $label, Array $args) : bool {
 		switch($cmd->getName()){
 			case "banui":
 			if(!$sender->hasPermission("banui.cmd")){
