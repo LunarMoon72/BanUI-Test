@@ -18,7 +18,7 @@ class Main extends PluginBase {
 	public function onCommand(Command $cmd, CommandSender $sender, String $label, Array $args) : bool {
 		switch($cmd->getName()){
 			case "banui":
-			if(!$sender->hasPermission()"banui.cmd"){
+			if(!$sender->hasPermission("banui.cmd")){
 				$sender->sendMessage("YOU LACK THE PERM LOL");
 			} else {
 				$this->mainUI($sender);
