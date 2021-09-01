@@ -37,7 +37,7 @@ class Main extends PluginBase {
 			var_dump($data);
 			switch($data){
 				case 0:
-				   $this->getServer()->sendMessage("/rca " . $player . " tempban " . $data[0] . " " . $data[1] . " " . $data[2]);
+				   $this->getServer()->dispatchCommand($player, "ban " . $data[0] . " " . $data[1] . " " . $data[2]);
 				   $player->sendMessage("§c[BanUI] Player has been banned for " . $data[1] . " days for " . $data[2]);
 				break;
 			}
@@ -78,7 +78,7 @@ class Main extends PluginBase {
 			var_dump($data);
 			switch($data){
 				case 0:
-				   $this->getServer()->sendMessage("/rca " . $player . " freeze " . $data[0]);
+				   $this->getServer()->dispatchCommand($player, "freeze " . $data[0] . " " . $data[1] . " " . $data[2]);
 				   if($data[0] === null){
 				   	$sender->sendMessage("§c[BanUI] Please put a Player!");
 				   }
@@ -94,7 +94,7 @@ class Main extends PluginBase {
 			var_dump($data);
 			switch($data){
 				case 0:
-				   $this->getServer()->sendMessage("/rca " . $player . " kick " . $data[0]);
+				   $this->getServer()->dispatchCommand($player, "kick " . $data[0] . " " . $data[1] . " " . $data[2]);
 				   if($data[0] === null){
 				   	$sender->sendMessage("§c[BanUI] Please put a Player!");
 				   }
